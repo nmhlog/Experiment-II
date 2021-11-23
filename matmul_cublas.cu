@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <cuda_runtime.h>
 #include "cublas_v2.h"
+
 #define IDX2C(i,j,ld) (((j)*(ld))+(i))
 
 int main ( void ){
@@ -13,7 +14,7 @@ cudaError_t cudaStat ; // cudaMalloc status
 cublasStatus_t stat ; // CUBLAS functions status
 cublasHandle_t handle ; // CUBLAS context
 int nBytes = N*N*sizeof(float);
-float *h_a, *h_b, *h_c,*h_cc;
+float *h_a, *h_b, *h_c;
         // Memory Allocation in Host
 h_a = (float *)malloc(nBytes);
 h_b = (float *)malloc(nBytes);
@@ -48,9 +49,9 @@ stat = cublasGetMatrix (N,N, sizeof (*d_c),d_c ,N,h_c,N); // cp d_c ->c
 printf ("Hasil Matrix Calculation :\n");
 for(int i=0;i<N;i ++){
     for(int j=0;j<N;j ++){
-        printf (" %7.0 f",h_c[IDX2C(i,j,N)]); // print c after Sgemm
+        printf(" %f",h_c[IDX2C(i,j,N)]); // print c after Sgemm
     }
-printf ("\n");
+printf("\n");
 }
 cudaFree(d_a); // free device memory
 cudaFree(d_b); // free device memory
