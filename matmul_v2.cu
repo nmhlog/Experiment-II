@@ -12,7 +12,7 @@ Book : Programming Massively Parallel Processor Chapter 4
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-// #define TILE_WIDTH 5
+#define TILE_WIDTH 25
 
 __global__ void gpuMatrixMul(float *d_a , float *d_b, float *d_c,int N) {
 	// Calculate the row index of the P element and M
