@@ -86,7 +86,7 @@ int main(int argc, char const *argv[]){
 	    }
 
     int N = atoi(argv[1]);
-    int Block_size = atoi(argv[2]);  
+    int BLOCK_SIZE = atoi(argv[2]);  
     int nBytes = N*N*sizeof(float);
     float *h_a, *h_b, *h_c,*h_cc;
         // Memory Allocation in Host
