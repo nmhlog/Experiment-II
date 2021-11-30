@@ -1,3 +1,9 @@
+/*
+sorce code from:
+http://cg.elte.hu/~gpgpu/cuda/linux/07_cublas/mygpu.pdf
+
+*/
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -59,7 +65,7 @@ stat = cublasGetMatrix(N,N, sizeof (*d_c),d_c ,N,h_c,N); // cp d_c ->c
 cudaEventRecord(stop, 0);
 cudaEventSynchronize(stop);
 cudaEventElapsedTime(&cpu_elapsed_time_ms, start, stop);
-printf("Time elapsed on matrix multiplication of %dx%d . %dx%d on cuda cublas: %f ms.\n\n", N,N,N,N, cpu_elapsed_time_ms);
+printf("Time elapsed on matrix multiplication of %dx%d . %dx%d on cuda cublas: %f ms.\n\n", N,N,N,N, cublas_elapsed_time_ms);
 // printf ("Hasil Matrix Calculation :\n");
 // for(int i=0;i<N;i ++){
 //     for(int j=0;j<N;j ++){
