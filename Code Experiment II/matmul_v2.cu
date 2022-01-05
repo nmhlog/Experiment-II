@@ -12,7 +12,7 @@ Book : Programming Massively Parallel Processor Chapter 4
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-#define TILE_WIDTH 25
+#define TILE_WIDTH 32
 
 __global__ void gpuMatrixMul(float *d_a , float *d_b, float *d_c,int N) {
 	// Calculate the row index of the P element and M
@@ -66,7 +66,7 @@ __global__ void gpuTiledMatrixMul(float* d_M, float* d_N, float* d_P, int Width,
 		}
 		__syncthreads();
 	}
-	if ((Row<Width) && (Col<Width)) d_P[Row*Width + Col] = Pvalue;
+	if ((Row<Width) && (Col<Width)){d_P[Row*Width + Col] = Pvalue;}
 }
 
 void verification(float *h_c,float *h_cc,int N,float denominator,float numerator){
@@ -108,13 +108,12 @@ void print_matrix(float *h_matrix,int N){
 
 }
 int main(int argc, char const *argv[]){
-	if (argc < 4) {
-		printf("Required args: N(dimension),BlockSize(), k\n");
+	if (argc < 2) {
+		printf("Required args: N(dimension)\n");
 		exit(-1);
 	}
     int N = atoi(argv[1]);
-    int BLOCK_SIZE = atoi(argv[2]);  
-	int const TILE_WIDTH = atoi(argv[3]);
+    int BLOCK_SIZE = TILE_WIDTH;  
     int nBytes = N*N*sizeof(float);
 	float *h_a, *h_b, *h_c,*h_cc,*h_tcc;
 	// Memory Allocation in Host
