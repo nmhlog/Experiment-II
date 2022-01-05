@@ -17,9 +17,9 @@ http://cg.elte.hu/~gpgpu/cuda/linux/07_cublas/mygpu.pdf
 
 int main (int argc, char const *argv[]){
 if (argc < 2) {
-		printf("Required args: N(dimension)\n");
-		exit(-1);
-	}
+                printf("Required args: N(dimension)\n");
+                exit(-1);
+        }
 int N = atoi(argv[1]);
 cudaError_t cudaStat ; // cudaMalloc status
 cublasStatus_t stat ; // CUBLAS functions status
